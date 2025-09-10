@@ -1,0 +1,124 @@
+#pragma version 10
+#pragma typetrack false
+
+// @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
+main:
+    intcblock 0 1
+    bytecblock "task" "pending" 0x151f7c75
+    txn ApplicationID
+    bnz main_after_if_else@2
+    // smart_contracts/checklist/contract.algo.ts:4
+    // task = GlobalState<string>({ key: "task", initialValue: "pending" })
+    bytec_0 // "task"
+    bytec_1 // "pending"
+    app_global_put
+
+main_after_if_else@2:
+    // smart_contracts/checklist/contract.algo.ts:3
+    // export class Checklist extends Contract {
+    txn NumAppArgs
+    bz main_bare_routing@9
+    pushbytess 0x3bfb8a4f 0x6f8160f6 // method "markDone()string", method "reset()string"
+    txna ApplicationArgs 0
+    match main_markDone_route@5 main_reset_route@6
+
+main_after_if_else@13:
+    // smart_contracts/checklist/contract.algo.ts:3
+    // export class Checklist extends Contract {
+    intc_0 // 0
+    return
+
+main_reset_route@6:
+    // smart_contracts/checklist/contract.algo.ts:11
+    // reset(): string {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub reset
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    bytec_2 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_markDone_route@5:
+    // smart_contracts/checklist/contract.algo.ts:6
+    // markDone(): string {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub markDone
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    bytec_2 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    return
+
+main_bare_routing@9:
+    // smart_contracts/checklist/contract.algo.ts:3
+    // export class Checklist extends Contract {
+    txn OnCompletion
+    bnz main_after_if_else@13
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    intc_1 // 1
+    return
+
+
+// smart_contracts/checklist/contract.algo.ts::Checklist.markDone() -> bytes:
+markDone:
+    // smart_contracts/checklist/contract.algo.ts:4
+    // task = GlobalState<string>({ key: "task", initialValue: "pending" })
+    bytec_0 // "task"
+    // smart_contracts/checklist/contract.algo.ts:7
+    // this.task.value = "done"
+    pushbytes "done"
+    app_global_put
+    // smart_contracts/checklist/contract.algo.ts:4
+    // task = GlobalState<string>({ key: "task", initialValue: "pending" })
+    intc_0 // 0
+    bytec_0 // "task"
+    app_global_get_ex
+    assert // check GlobalState exists
+    // smart_contracts/checklist/contract.algo.ts:8
+    // return this.task.value
+    retsub
+
+
+// smart_contracts/checklist/contract.algo.ts::Checklist.reset() -> bytes:
+reset:
+    // smart_contracts/checklist/contract.algo.ts:4
+    // task = GlobalState<string>({ key: "task", initialValue: "pending" })
+    bytec_0 // "task"
+    // smart_contracts/checklist/contract.algo.ts:12
+    // this.task.value = "pending"
+    bytec_1 // "pending"
+    app_global_put
+    // smart_contracts/checklist/contract.algo.ts:4
+    // task = GlobalState<string>({ key: "task", initialValue: "pending" })
+    intc_0 // 0
+    bytec_0 // "task"
+    app_global_get_ex
+    assert // check GlobalState exists
+    // smart_contracts/checklist/contract.algo.ts:13
+    // return this.task.value
+    retsub

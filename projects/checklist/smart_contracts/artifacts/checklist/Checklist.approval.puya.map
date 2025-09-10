@@ -1,0 +1,604 @@
+{
+  "version": 3,
+  "sources": [
+    "/media/home/New Volume/algorand/checklist/projects/checklist/smart_contracts/checklist/contract.algo.ts"
+  ],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAGoC;AAAsB;AAAxD;AADF;;AAAA;;;AAAA;;;;;;;;;;;;AAAA;;;AAAA;;;;;;AAAA;;AAQE;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AALA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AAHF;;AAAA;;;AAAA;;AAAA;AAAA;AAAA;;AACoC;AAGd;;;;;;AAAlB;AAHgC;AAAA;AAAA;AAAA;AAIhC;AAJgC;AAQd;AAAlB;AARgC;AAAA;AAAA;AAAA;AAShC",
+  "op_pc_offset": 0,
+  "pc_events": {
+    "1": {
+      "subroutine": "@algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram",
+      "params": {},
+      "block": "main",
+      "stack_in": [],
+      "op": "intcblock 0 1"
+    },
+    "5": {
+      "op": "bytecblock \"task\" \"pending\" 0x151f7c75"
+    },
+    "25": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "reinterpret_bool%0#0"
+      ],
+      "stack_out": [
+        "reinterpret_bool%0#0"
+      ]
+    },
+    "27": {
+      "op": "bnz main_after_if_else@2",
+      "stack_out": []
+    },
+    "30": {
+      "op": "bytec_0 // \"task\"",
+      "defined_out": [
+        "\"task\""
+      ],
+      "stack_out": [
+        "\"task\""
+      ]
+    },
+    "31": {
+      "op": "bytec_1 // \"pending\"",
+      "defined_out": [
+        "\"pending\"",
+        "\"task\""
+      ],
+      "stack_out": [
+        "\"task\"",
+        "\"pending\""
+      ]
+    },
+    "32": {
+      "op": "app_global_put",
+      "stack_out": []
+    },
+    "33": {
+      "block": "main_after_if_else@2",
+      "stack_in": [],
+      "op": "txn NumAppArgs",
+      "defined_out": [
+        "tmp%0#1"
+      ],
+      "stack_out": [
+        "tmp%0#1"
+      ]
+    },
+    "35": {
+      "op": "bz main_bare_routing@9",
+      "stack_out": []
+    },
+    "38": {
+      "op": "pushbytess 0x3bfb8a4f 0x6f8160f6 // method \"markDone()string\", method \"reset()string\"",
+      "defined_out": [
+        "Method(markDone()string)",
+        "Method(reset()string)"
+      ],
+      "stack_out": [
+        "Method(markDone()string)",
+        "Method(reset()string)"
+      ]
+    },
+    "50": {
+      "op": "txna ApplicationArgs 0",
+      "defined_out": [
+        "Method(markDone()string)",
+        "Method(reset()string)",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "Method(markDone()string)",
+        "Method(reset()string)",
+        "tmp%2#0"
+      ]
+    },
+    "53": {
+      "op": "match main_markDone_route@5 main_reset_route@6",
+      "stack_out": []
+    },
+    "59": {
+      "block": "main_after_if_else@13",
+      "stack_in": [],
+      "op": "intc_0 // 0",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "60": {
+      "op": "return",
+      "stack_out": []
+    },
+    "61": {
+      "block": "main_reset_route@6",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%8#0"
+      ]
+    },
+    "63": {
+      "op": "!",
+      "defined_out": [
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%9#0"
+      ]
+    },
+    "64": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "65": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%10#0"
+      ],
+      "stack_out": [
+        "tmp%10#0"
+      ]
+    },
+    "67": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "68": {
+      "callsub": "smart_contracts/checklist/contract.algo.ts::Checklist.reset",
+      "op": "callsub reset",
+      "defined_out": [
+        "to_encode%1#0"
+      ],
+      "stack_out": [
+        "to_encode%1#0"
+      ]
+    },
+    "71": {
+      "op": "dup",
+      "defined_out": [
+        "to_encode%1#0",
+        "to_encode%1#0 (copy)"
+      ],
+      "stack_out": [
+        "to_encode%1#0",
+        "to_encode%1#0 (copy)"
+      ]
+    },
+    "72": {
+      "op": "len",
+      "defined_out": [
+        "length%1#0",
+        "to_encode%1#0"
+      ],
+      "stack_out": [
+        "to_encode%1#0",
+        "length%1#0"
+      ]
+    },
+    "73": {
+      "op": "itob",
+      "defined_out": [
+        "as_bytes%1#0",
+        "to_encode%1#0"
+      ],
+      "stack_out": [
+        "to_encode%1#0",
+        "as_bytes%1#0"
+      ]
+    },
+    "74": {
+      "op": "extract 6 2",
+      "defined_out": [
+        "length_uint16%1#0",
+        "to_encode%1#0"
+      ],
+      "stack_out": [
+        "to_encode%1#0",
+        "length_uint16%1#0"
+      ]
+    },
+    "77": {
+      "op": "swap",
+      "stack_out": [
+        "length_uint16%1#0",
+        "to_encode%1#0"
+      ]
+    },
+    "78": {
+      "op": "concat",
+      "defined_out": [
+        "encoded_value%1#0"
+      ],
+      "stack_out": [
+        "encoded_value%1#0"
+      ]
+    },
+    "79": {
+      "op": "bytec_2 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "encoded_value%1#0"
+      ],
+      "stack_out": [
+        "encoded_value%1#0",
+        "0x151f7c75"
+      ]
+    },
+    "80": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "encoded_value%1#0"
+      ]
+    },
+    "81": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%12#0"
+      ],
+      "stack_out": [
+        "tmp%12#0"
+      ]
+    },
+    "82": {
+      "op": "log",
+      "stack_out": []
+    },
+    "83": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "84": {
+      "op": "return",
+      "stack_out": []
+    },
+    "85": {
+      "block": "main_markDone_route@5",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "87": {
+      "op": "!",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "88": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "89": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%5#0"
+      ]
+    },
+    "91": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "92": {
+      "callsub": "smart_contracts/checklist/contract.algo.ts::Checklist.markDone",
+      "op": "callsub markDone",
+      "defined_out": [
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "to_encode%0#0"
+      ]
+    },
+    "95": {
+      "op": "dup",
+      "defined_out": [
+        "to_encode%0#0",
+        "to_encode%0#0 (copy)"
+      ],
+      "stack_out": [
+        "to_encode%0#0",
+        "to_encode%0#0 (copy)"
+      ]
+    },
+    "96": {
+      "op": "len",
+      "defined_out": [
+        "length%0#0",
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "to_encode%0#0",
+        "length%0#0"
+      ]
+    },
+    "97": {
+      "op": "itob",
+      "defined_out": [
+        "as_bytes%0#0",
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "to_encode%0#0",
+        "as_bytes%0#0"
+      ]
+    },
+    "98": {
+      "op": "extract 6 2",
+      "defined_out": [
+        "length_uint16%0#0",
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "to_encode%0#0",
+        "length_uint16%0#0"
+      ]
+    },
+    "101": {
+      "op": "swap",
+      "stack_out": [
+        "length_uint16%0#0",
+        "to_encode%0#0"
+      ]
+    },
+    "102": {
+      "op": "concat",
+      "defined_out": [
+        "encoded_value%0#0"
+      ],
+      "stack_out": [
+        "encoded_value%0#0"
+      ]
+    },
+    "103": {
+      "op": "bytec_2 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "encoded_value%0#0"
+      ],
+      "stack_out": [
+        "encoded_value%0#0",
+        "0x151f7c75"
+      ]
+    },
+    "104": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "encoded_value%0#0"
+      ]
+    },
+    "105": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0"
+      ]
+    },
+    "106": {
+      "op": "log",
+      "stack_out": []
+    },
+    "107": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "108": {
+      "op": "return",
+      "stack_out": []
+    },
+    "109": {
+      "block": "main_bare_routing@9",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%13#0"
+      ],
+      "stack_out": [
+        "tmp%13#0"
+      ]
+    },
+    "111": {
+      "op": "bnz main_after_if_else@13",
+      "stack_out": []
+    },
+    "114": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%14#0"
+      ],
+      "stack_out": [
+        "tmp%14#0"
+      ]
+    },
+    "116": {
+      "op": "!",
+      "defined_out": [
+        "tmp%15#0"
+      ],
+      "stack_out": [
+        "tmp%15#0"
+      ]
+    },
+    "117": {
+      "error": "can only call when creating",
+      "op": "assert // can only call when creating",
+      "stack_out": []
+    },
+    "118": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "119": {
+      "op": "return",
+      "stack_out": []
+    },
+    "120": {
+      "subroutine": "smart_contracts/checklist/contract.algo.ts::Checklist.markDone",
+      "params": {},
+      "block": "markDone",
+      "stack_in": [],
+      "op": "bytec_0 // \"task\"",
+      "defined_out": [
+        "\"task\""
+      ],
+      "stack_out": [
+        "\"task\""
+      ]
+    },
+    "121": {
+      "op": "pushbytes \"done\"",
+      "defined_out": [
+        "\"done\"",
+        "\"task\""
+      ],
+      "stack_out": [
+        "\"task\"",
+        "\"done\""
+      ]
+    },
+    "127": {
+      "op": "app_global_put",
+      "stack_out": []
+    },
+    "128": {
+      "op": "intc_0 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "129": {
+      "op": "bytec_0 // \"task\"",
+      "stack_out": [
+        "0",
+        "\"task\""
+      ]
+    },
+    "130": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0"
+      ],
+      "stack_out": [
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "131": {
+      "error": "check GlobalState exists",
+      "op": "assert // check GlobalState exists",
+      "stack_out": [
+        "maybe_value%0#0"
+      ]
+    },
+    "132": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "133": {
+      "subroutine": "smart_contracts/checklist/contract.algo.ts::Checklist.reset",
+      "params": {},
+      "block": "reset",
+      "stack_in": [],
+      "op": "bytec_0 // \"task\"",
+      "defined_out": [
+        "\"task\""
+      ],
+      "stack_out": [
+        "\"task\""
+      ]
+    },
+    "134": {
+      "op": "bytec_1 // \"pending\"",
+      "defined_out": [
+        "\"pending\"",
+        "\"task\""
+      ],
+      "stack_out": [
+        "\"task\"",
+        "\"pending\""
+      ]
+    },
+    "135": {
+      "op": "app_global_put",
+      "stack_out": []
+    },
+    "136": {
+      "op": "intc_0 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "137": {
+      "op": "bytec_0 // \"task\"",
+      "stack_out": [
+        "0",
+        "\"task\""
+      ]
+    },
+    "138": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0"
+      ],
+      "stack_out": [
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "139": {
+      "error": "check GlobalState exists",
+      "op": "assert // check GlobalState exists",
+      "stack_out": [
+        "maybe_value%0#0"
+      ]
+    },
+    "140": {
+      "retsub": true,
+      "op": "retsub"
+    }
+  }
+}

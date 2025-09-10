@@ -1,107 +1,156 @@
-# checklist
 
-This project has been generated using AlgoKit. See below for default getting started instructions.
+# Checklist dApp — Algorand (Simple Stateful Contract)
 
-# Setup
+**One-line:** A minimal Algorand stateful smart contract that maintains a global `task` status and exposes `markDone` and `reset` methods.
 
-### Pre-requisites
+---
 
-- [Nodejs 22](https://nodejs.org/en/download) or later
-- [AlgoKit CLI 2.5](https://github.com/algorandfoundation/algokit-cli?tab=readme-ov-file#install) or later
-- [Docker](https://www.docker.com/) (only required for LocalNet)
-- [Puya Compiler 4.4.4](https://pypi.org/project/puyapy/) or later
+## Table of contents
 
-> For interactive tour over the codebase, download [vsls-contrib.codetour](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour) extension for VS Code, then open the [`.codetour.json`](./.tours/getting-started-with-your-algokit-project.tour) file in code tour extension.
+* [Project Description](#project-description)
+* [What it does](#what-it-does)
+* [Features](#features)
+* [Deployed Smart Contract Link](#deployed-smart-contract-link)
+* [Screenshot](#screenshot)
+* [Contract interface & quick explanation](#contract-interface--quick-explanation)
+* [How to call the contract (example)](#how-to-call-the-contract-example)
+* [Limitations & suggested improvements](#limitations--suggested-improvements)
+* [Development / Local testing (quick start)](#development--local-testing-quick-start)
+* [Contributing](#contributing)
+* [License](#license)
 
-### Initial Setup
+---
 
-#### 1. Clone the Repository
-Start by cloning this repository to your local machine.
+## Project Description
 
-#### 2. Install Pre-requisites
-Ensure the following pre-requisites are installed and properly configured:
+This project demonstrates a **beginner-friendly stateful Algorand smart contract** (written using the `@algorandfoundation/algorand-typescript` style) that provides two simple task-tracking operations:
 
-- **Docker**: Required for running a local Algorand network.
-- **AlgoKit CLI**: Essential for project setup and operations. Verify installation with `algokit --version`, expecting `2.6.0` or later.
+* **markDone**: Sets the status of a global task to "done".
+* **reset**: Resets the task status back to "pending".
 
-#### 3. Bootstrap Your Local Environment
-Run the following commands within the project folder:
+It’s intentionally minimal, to help you understand how to:
 
-- **Setup Project**: Execute `algokit project bootstrap all` to install dependencies and setup npm dependencies.
-- **Configure environment**: Execute `algokit generate env-file -a target_network localnet` to create a `.env.localnet` file with default configuration for `localnet`.
-- **Start LocalNet**: Use `algokit localnet start` to initiate a local Algorand network.
+* Define and update global state with string values.
+* Write simple contract methods to change that state.
+* Interact with a contract from a script or frontend.
 
-### Development Workflow
+---
 
-#### Terminal
-Directly manage and interact with your project using AlgoKit commands:
+## What it does
 
-1. **Build Contracts**: `algokit project run build` compiles all smart contracts. You can also specify a specific contract by passing the name of the contract folder as an extra argument.
-For example: `algokit project run build -- hello_world` will only build the `hello_world` contract.
-2. **Deploy**: Use `algokit project deploy localnet` to deploy contracts to the local network. You can also specify a specific contract by passing the name of the contract folder as an extra argument.
-For example: `algokit project deploy localnet -- hello_world` will only deploy the `hello_world` contract.
+* Exposes two methods:
+  * `markDone()` → Sets the global `task` state to `"done"`.
+  * `reset()` → Sets the global `task` state back to `"pending"`.
+* Global state stores a single string key: `task`.
+* Returns the updated task status after each operation.
 
-#### VS Code 
-For a seamless experience with breakpoint debugging and other features:
+**Typical workflow:**
 
-1. **Open Project**: In VS Code, open the repository root.
-2. **Install Extensions**: Follow prompts to install recommended extensions.
-3. **Debugging**:
-   - Use `F5` to start debugging.
+1. The contract starts with the `task` state as "pending".
+2. A user calls `markDone()` → the `task` state changes to "done".
+3. A user calls `reset()` → the `task` state changes back to "pending".
+4. The global state `task` can be queried by any client to see the current status.
 
-#### JetBrains IDEs
-While primarily optimized for VS Code, JetBrains IDEs are supported:
+---
 
-1. **Open Project**: In your JetBrains IDE, open the repository root.
-2. **Automatic Setup**: The IDE should configure the Node.js environment.
-3. **Debugging**: Use `Shift+F10` or `Ctrl+R` to start debugging. Note: Windows users may encounter issues with pre-launch tasks due to a known bug. See [JetBrains forums](https://youtrack.jetbrains.com/issue/IDEA-277486/Shell-script-configuration-cannot-run-as-before-launch-task) for workarounds.
+## Features
 
-## AlgoKit Workspaces and Project Management
-This project supports both standalone and monorepo setups through AlgoKit workspaces. Leverage [`algokit project run`](https://github.com/algorandfoundation/algokit-cli/blob/main/docs/features/project/run.md) commands for efficient monorepo project orchestration and management across multiple projects within a workspace.
+* Minimal, easy-to-follow stateful Algorand smart contract.
+* Implements simple state-change logic (`pending` ↔ `done`).
+* Global state tracks a single `task` status string.
+* Beginner-friendly structure for extending into larger to-do list or workflow dApps.
 
-## AlgoKit Generators
+---
 
-This template provides a set of [algokit generators](https://github.com/algorandfoundation/algokit-cli/blob/main/docs/features/generate.md) that allow you to further modify the project instantiated from the template to fit your needs, as well as giving you a base to build your own extensions to invoke via the `algokit generate` command.
+## Deployed Smart Contract Link
 
-### Generate Smart Contract 
+🚀 [**https://lora.algokit.io/testnet/application/745629445**](https://lora.algokit.io/testnet/application/745629445)
 
-By default the template creates a single `HelloWorld` contract under checklist folder in the `smart_contracts` directory. To add a new contract:
+(Contract Application ID: `745629445`)
 
-1. From the root of the project (`../`) execute `algokit generate smart-contract`. This will create a new starter smart contract and deployment configuration file under `{your_contract_name}` subfolder in the `smart_contracts` directory.
-2. Each contract potentially has different creation parameters and deployment steps. Hence, you need to define your deployment logic in `deploy-config.ts` file.
-3. Technically, you need to reference your contract deployment logic in the `index.ts` file. However, by default, `index.ts` will auto import all TypeScript deployment files under `smart_contracts` directory. If you want to manually import specific contracts, modify the default code provided by the template in `index.ts` file.
+---
 
-> Please note, above is just a suggested convention tailored for the base configuration and structure of this template. The default code supplied by the template in the `index.ts` file is tailored for the suggested convention. You are free to modify the structure and naming conventions as you see fit.
+## Screenshot
 
-### Generate '.env' files
+_(Add a screenshot of the dApp interface or a transaction explorer view here)_
 
-By default the template instance does not contain any env files to deploy to different networks. Using [`algokit project deploy`](https://github.com/algorandfoundation/algokit-cli/blob/main/docs/features/project/deploy.md) against `localnet` | `testnet` | `mainnet` will use default values for `algod` and `indexer` unless overwritten via `.env` or `.env.{target_network}`. 
+![Checklist dApp Screenshot](algorand.png)
 
-To generate a new `.env` or `.env.{target_network}` file, run `algokit generate env-file`
+---
 
-### Debugging Smart Contracts
+## Contract interface & quick explanation
 
-This project is optimized to work with AlgoKit AVM Debugger extension. To activate it:
+Here’s the Checklist contract code:
 
-Refer to the commented header in the `index.ts` file in the `smart_contracts` folder.Since you have opted in to include VSCode launch configurations in your project, you can also use the `Debug TEAL via AlgoKit AVM Debugger` launch configuration to interactively select an available trace file and launch the debug session for your smart contract.
+```ts
+import { Contract, GlobalState } from '@algorandfoundation/algorand-typescript'
 
+export class Checklist extends Contract {
+  task = GlobalState<string>({ key: "task", initialValue: "pending" })
 
-For information on using and setting up the `AlgoKit AVM Debugger` VSCode extension refer [here](https://github.com/algorandfoundation/algokit-avm-vscode-debugger). To install the extension from the VSCode Marketplace, use the following link: [AlgoKit AVM Debugger extension](https://marketplace.visualstudio.com/items?itemName=algorandfoundation.algokit-avm-vscode-debugger).
+  markDone(): string {
+    this.task.value = "done"
+    return this.task.value
+  }
 
-# Tools
+  reset(): string {
+    this.task.value = "pending"
+    return this.task.value
+  }
+}
+````
 
-This project makes use of Algorand TypeScript to build Algorand smart contracts. The following tools are in use:
+-----
 
-- [Algorand](https://www.algorand.com/) - Layer 1 Blockchain; [Developer portal](https://dev.algorand.co/), [Why Algorand?](https://dev.algorand.co/getting-started/why-algorand/)
-- [AlgoKit](https://github.com/algorandfoundation/algokit-cli) - One-stop shop tool for developers building on the Algorand network; [docs](https://github.com/algorandfoundation/algokit-cli/blob/main/docs/algokit.md), [intro tutorial](https://github.com/algorandfoundation/algokit-cli/blob/main/docs/tutorials/intro.md)
-- [Algorand TypeScript](https://github.com/algorandfoundation/puya-ts/) - A semantically and syntactically compatible, typed TypeScript language that works with standard TypeScript tooling and allows you to express smart contracts (apps) and smart signatures (logic signatures) for deployment on the Algorand Virtual Machine (AVM); [docs](https://github.com/algorandfoundation/puya-ts/), [examples](https://github.com/algorandfoundation/puya-ts/tree/main/examples)
-- [AlgoKit Utils](https://github.com/algorandfoundation/algokit-utils-ts) - A set of core Algorand utilities that make it easier to build solutions on Algorand.
-- [NPM](https://www.npmjs.com/): TypeScript packaging and dependency management.
-- [TypeScript](https://www.typescriptlang.org/): Strongly typed programming language that builds on JavaScript
-- [ts-node-dev](https://github.com/wclr/ts-node-dev): TypeScript development execution environment
+## How to call the contract (example)
 
+You can call the contract's methods using various tools like the AlgoKit CLI, Goal, or any Algorand SDK.
 
-It has also been configured to have a productive dev experience out of the box in [VS Code](https://code.visualstudio.com/), see the [.vscode](./.vscode) folder.
+**Using AlgoKit CLI:**
 
+```bash
+# Mark the task as done
+algokit call testnet-app-745629445 markDone
 
+# Reset the task to pending
+algokit call testnet-app-745629445 reset
+```
 
+-----
+
+## Limitations & suggested improvements
+
+This is a very basic example with some clear limitations:
+
+  * **Single Global Task:** It only tracks one task for everyone.
+  * **No Customization:** The task itself isn't defined, only its state.
+
+**Suggested Improvements:**
+
+  * **User-Specific Tasks:** Use Local State (`LocalState<string>`) to allow each user account to have their own task status.
+  * **Multiple Tasks:** Expand the contract to manage a list of tasks, perhaps by serializing an array into a global state value or using multiple state keys.
+  * **Custom Task Names:** Add a method that allows a user to set the text of the task, e.g., `createTask(name: string)`.
+
+-----
+
+## Development / Local testing (quick start)
+
+1.  **Clone the repository.**
+2.  **Install dependencies:** `npm install`
+3.  **Run tests:** `npm test`
+4.  **Deploy (using AlgoKit):** `algokit deploy`
+
+-----
+
+## Contributing
+
+Contributions are welcome\! Please feel free to submit a pull request or open an issue.
+
+-----
+
+## License
+
+This project is licensed under the MIT License.
+
+```
+```
